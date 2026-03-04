@@ -1,0 +1,88 @@
+<<!DOCTYPE html>
+<html>
+<head>
+    <title> Calculator</title>
+    <style>
+        #calculator
+         {
+            width: 220px;
+         }
+
+        #display
+         {
+            width: 210px;
+            height: 40px;
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 10px;
+         }
+
+        .btn 
+        {
+            width: 50px;
+            height: 40px;
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Calculator</h1>
+
+<div id="calculator">
+    <input type="text" id="display" disabled />
+    <div id="buttons"></div>
+</div>
+
+<script>
+
+    let values = [
+        "7", "8", "9", "/",
+        "4", "5", "6", "*",
+        "1", "2", "3", "-",
+        "0", "C", "=", "+"
+    ];
+
+    let buttonsDiv = document.getElementById("buttons");
+    let display = document.getElementById("display");
+
+    for (let i = 0; i < values.length; i++) {
+
+        let btn = document.createElement("input");
+        btn.type = "button";
+        btn.value = values[i];
+        btn.className = "btn";
+
+        btn.addEventListener("click", function () {
+            handleClick(values[i]);
+        });
+
+        buttonsDiv.appendChild(btn);
+
+        if ((i + 1) % 4 === 0) {
+            buttonsDiv.appendChild(document.createElement("br"));
+        }
+    }
+
+    function handleClick(value) {
+
+        if (value === "C") {
+            display.value = "";
+        }
+        else if (value === "=") {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Error";
+            }
+        }
+        else {
+            display.value += value;
+        }
+    }
+
+</script>
+
+</body>
+</html>
